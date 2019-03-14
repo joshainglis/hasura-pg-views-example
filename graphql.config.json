@@ -1,0 +1,27 @@
+{
+ "schema": {
+   "request": {
+     "url" : "http://localhost:8081/v1alpha1/graphql",
+     "method" : "POST",
+     "postIntrospectionQuery" : true,
+     "options" : {
+       "headers": {
+         "user-agent" : "JS GraphQL",
+         "X-Hasura-Access-Key": "myadminsecretkey"
+       }
+     }
+   }
+ },
+ "endpoints" : [
+   {
+     "name": "Default (http://localhost:8081/graphql)",
+     "url": "http://localhost:8081/v1alpha1/graphql",
+     "options" : {
+       "headers": {
+         "user-agent" : "JS GraphQL",
+         "X-Hasura-Access-Key": "myadminsecretkey"
+       }
+     }
+   }
+ ]
+}

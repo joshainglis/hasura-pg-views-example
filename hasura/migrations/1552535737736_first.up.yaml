@@ -1,0 +1,138 @@
+- args:
+    name: companies_v1
+    schema: public
+  type: add_existing_table_or_view
+
+- args:
+    name: customers_v1
+    schema: public
+  type: add_existing_table_or_view
+
+- args:
+    name: invoice_items_v1
+    schema: public
+  type: add_existing_table_or_view
+
+- args:
+    name: invoices_v1
+    schema: public
+  type: add_existing_table_or_view
+
+- args:
+    name: products_v1
+    schema: public
+  type: add_existing_table_or_view
+
+
+- type: create_object_relationship
+  args:
+    name: invoice
+    table:
+      name: invoice_items_v1
+      schema: public
+    using:
+      manual_configuration:
+        column_mapping:
+          invoice_id: id
+        remote_table:
+          name: invoices_v1
+          schema: public
+
+- type: create_array_relationship
+  args:
+    name: invoice_items
+    table:
+      name: invoices_v1
+      schema: public
+    using:
+      manual_configuration:
+        column_mapping:
+          id: invoice_id
+        remote_table:
+          name: invoice_items_v1
+          schema: public
+
+- type: create_object_relationship
+  args:
+    name: company
+    table:
+      name: products_v1
+      schema: public
+    using:
+      manual_configuration:
+        column_mapping:
+          company_id: id
+        remote_table:
+          name: companies_v1
+          schema: public
+
+- type: create_array_relationship
+  args:
+    name: products
+    table:
+      name: companies_v1
+      schema: public
+    using:
+      manual_configuration:
+        column_mapping:
+          id: company_id
+        remote_table:
+          name: products_v1
+          schema: public
+
+- type: create_object_relationship
+  args:
+    name: customer
+    table:
+      name: invoices_v1
+      schema: public
+    using:
+      manual_configuration:
+        column_mapping:
+          customer_id: id
+        remote_table:
+          name: customers_v1
+          schema: public
+
+- type: create_array_relationship
+  args:
+    name: invoices
+    table:
+      name: customers_v1
+      schema: public
+    using:
+      manual_configuration:
+        column_mapping:
+          id: customer_id
+        remote_table:
+          name: invoices_v1
+          schema: public
+
+
+- type: create_object_relationship
+  args:
+    name: product
+    table:
+      name: invoice_items_v1
+      schema: public
+    using:
+      manual_configuration:
+        column_mapping:
+          product_id: id
+        remote_table:
+          name: products_v1
+          schema: public
+
+- type: create_array_relationship
+  args:
+    name: invoice_items
+    table:
+      name: products_v1
+      schema: public
+    using:
+      manual_configuration:
+        column_mapping:
+          id: product_id
+        remote_table:
+          name: invoice_items_v1
+          schema: public
